@@ -1,0 +1,7 @@
+Mi Municipio - 31 de octubre de 2026
+
+La funcion Edge mi-municipio fue desplegada en Supabase (version 5).
+La base de datos concede acceso general a Administrador de Mezquitic.
+Este ZIP incluye acceso a dashboard, graficas, usuarios y reportes municipales.
+No ejecutar schema.sql ni seed-reference.sql sobre una base existente.
+Subir el contenido del ZIP a Netlify; comprobar inicio de sesion con ambos administradores.

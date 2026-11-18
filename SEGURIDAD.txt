@@ -1,0 +1,57 @@
+MI MUNICIPIO — SEGURIDAD Y VERIFICACIÓN
+
+Autenticación: Supabase Auth. Las contraseñas no se incluyen en el HTML ni se
+guardan en localStorage. La clave pública identifica el proyecto; no concede
+acceso a las tablas. La clave service_role existe solo en el servidor Supabase.
+
+La API verifica cada token y consulta el perfil activo en cada solicitud. Los
+permisos se verifican en el servidor y en las operaciones transaccionales de datos.
+Ciudadanía ve sus reportes y los folios a los que agregó apoyo; no recibe notas
+internas. La consulta pública entrega únicamente datos de seguimiento por folio.
+La administración municipal accede a todos los reportes. Mezquitic accede a
+reportes cuya dirección contiene Mezquitic. Las dependencias reciben reportes
+asignados o compartidos con su área. Esta regla territorial depende de la dirección
+capturada; no representa una delimitación cartográfica oficial.
+
+RLS está habilitado en todas las tablas; anon y authenticated no tienen acceso
+directo. Los permisos de la API son necesarios, ya que la cuenta técnica del
+servidor puede operar sobre esas tablas. No publiques claves secretas.
+
+Los duplicados se resuelven en una transacción del servidor. Los apoyos y los
+folios no dependen del contador de un teléfono. Las escrituras de reportes incluyen
+identificador de solicitud; repetir la misma solicitud no repite la operación.
+Los cambios administrativos de reportes comprueban la versión existente. La
+confirmación de descarga registra la versión respaldada, pero no prueba que una
+persona conservó físicamente el archivo.
+
+Las fotografías comprimidas se guardan dentro del registro protegido del reporte.
+No se publican en una carpeta abierta. El formato actual prioriza compatibilidad
+con la aplicación original; conviene migrar fotografías a almacenamiento privado
+si el volumen de registros aumenta.
+
+Auditoría: registra acciones de datos, sesiones iniciadas y cambios de cuentas en
+el servidor. No registra cada clic o navegación como la versión local.
+Notificaciones: muestra actividad de los reportes visibles; no incluye avisos push.
+
+VERIFICACIONES REALIZADAS
+- Consulta real de permisos: sin lectura directa de tablas ni ejecución de
+  funciones de escritura para anon/authenticated.
+- Consultas de alcance por dependencia, áreas compartidas y Mezquitic.
+- Prueba transaccional real, revertida al finalizar: folio, creación, repetición
+  idempotente, duplicado en el mismo punto, suma de apoyos, filtrado de propietarios,
+  exclusión de notas internas y rechazo de actualización por ciudadanía.
+- API real: consulta pública sin datos privados y rechazo de escritura sin sesión.
+- Revisión de seguridad de Supabase: sin avisos pendientes tras los cambios.
+- Sintaxis JavaScript y pruebas de interfaz con DOM simulado: acceso ciudadano,
+  envío, confirmación, botones + y confirmar, actualización administrativa y notas.
+- Se conservaron estilos, pantalla de inicio y el escudo incrustado original.
+
+PENDIENTES
+Las dos cuentas administrativas se crearon después de recibir autorización explícita.
+Se comprobó el inicio de sesión real, el rol y el bloqueo de operaciones hasta
+actualizar los datos del primer ingreso; las sesiones de prueba se cerraron.
+Las pruebas de interfaz utilizan
+respuestas simuladas y no sustituyen pruebas finales en dos dispositivos reales.
+No se completó una revisión visual en navegador: el navegador de pruebas no estuvo
+disponible en este entorno. El sitio de Netlify todavía requiere subir el paquete.
+Recuperación por correo requiere URL Configuration y SMTP del proyecto.

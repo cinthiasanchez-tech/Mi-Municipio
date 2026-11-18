@@ -1,0 +1,73 @@
+MI MUNICIPIO — CONEXIÓN CON SUPABASE
+31 de octubre de 2026
+
+ESTADO DE LA ENTREGA
+La base de datos y el servicio de Mi Municipio ya están configurados en el proyecto
+Mimunicipio. Este paquete contiene la aplicación que los utiliza.
+La aplicación publicada en Netlify NO ha sido reemplazada desde esta conversación.
+Las cuentas administrativas iniciales ya fueron creadas con autorización del titular:
+admin-sanjuan (Administrador municipal) y admin-mezquitic (Administrador de la Delegación).
+Las contraseñas temporales se entregan por separado en la conversación; no se
+incluyen en el código ni en este paquete. Se deben cambiar al primer ingreso.
+
+PUBLICAR EN NETLIFY
+1. Antes de reemplazar tu versión actual, descarga sus respaldos JSON/CSV desde
+   cada navegador que tenga reportes importantes. Los registros guardados en
+   navegadores anteriores no se transfieren automáticamente a la base de datos.
+2. Descomprime el ZIP. Abre la carpeta MiMunicipio.
+3. En tu sitio actual de Netlify, entra a Deploys y utiliza la carga manual del
+   sitio. Sube la carpeta MiMunicipio, que contiene index.html en su raíz.
+   También puedes reemplazar esos archivos en tu repositorio y desplegarlo.
+4. No requiere comando de compilación ni variables secretas en Netlify.
+5. Abre https://mimunicipioapp.netlify.app/ con conexión a Internet. Cierra y
+   vuelve a abrir la PWA para recibir la nueva versión.
+6. Entra por Personal
+   municipal, selecciona el tipo de acceso y actualiza tus datos al primer ingreso.
+7. Crea las cuentas de dependencias en Usuarios y permisos. Las cuentas anteriores
+   locales deben recrearse con su rol y dependencia; las contraseñas antiguas no
+   se transfieren al servidor.
+
+LO QUE SE SINCRONIZA
+- Usuarios ciudadanos y de dependencias, roles y activación de cuentas.
+- Reportes, fotografías, estados, asignación y dependencias compartidas.
+- Notas públicas e internas: ciudadanía y consulta pública no reciben notas internas.
+- Reglas de asignación, dependencias, configuración y auditoría de acciones del servidor.
+- Folios generados por el servidor y suma de reportes duplicados a 5 metros.
+- Comprobación en el servidor de copia confirmada antes de eliminar un reporte.
+
+ACTUALIZACIÓN ENTRE DISPOSITIVOS
+Las escrituras se confirman en el servidor antes de mostrar éxito. Los paneles
+abiertos consultan cambios cada 15 segundos y al volver a la aplicación.
+No se reemplazan formularios que se estén editando. Al terminar o cambiar de
+pantalla vuelven las actualizaciones. Un reporte modificado por otro dispositivo
+requiere recargar antes de volver a guardarlo, para evitar sobrescribir notas.
+Es necesaria conexión para iniciar sesión, consultar y guardar. El modo sin
+conexión conserva únicamente la pantalla básica de la PWA, no guarda reportes.
+La sesión se mantiene en la pestaña; al cerrar el navegador puede requerir iniciar
+sesión nuevamente. Los datos permanecen guardados en el servidor.
+
+RECUPERACIÓN DE CONTRASEÑAS
+El botón envía la solicitud de recuperación a Supabase Auth. Para que los enlaces
+regresen a la aplicación:
+- Supabase > Authentication > URL Configuration > Site URL:
+  https://mimunicipioapp.netlify.app/
+- Agrega esa misma URL en Redirect URLs.
+- Configura un proveedor SMTP para enviar correos a la ciudadanía. El servicio de
+  correo de prueba de Supabase tiene restricciones de destinatarios y envío; sin
+  un proveedor configurado la recuperación puede no llegar a correos externos.
+El paquete no envía una contraseña nueva por correo: usa un enlace de recuperación.
+
+DATOS ANTERIORES E IMPORTACIONES
+No se eliminó ni sobrescribió el almacenamiento local de versiones anteriores.
+Esta entrega no importa automáticamente archivos CSV ni cuentas locales. El botón
+anterior de importación avisa que la migración debe revisarse para conservar
+propietarios y permisos; no simula un guardado. Conserva los respaldos para la
+migración de esos registros. La exportación JSON/CSV y la impresión PDF siguen
+disponibles para los datos del servidor visibles según el rol.
+
+ARCHIVOS
+index.html, sw.js, manifest.webmanifest, icons/: publicación de la aplicación.
+_headers: configuración de caché y cabeceras para Netlify.
+supabase/: código de servidor y referencia del esquema; ya desplegados.
+No vuelvas a ejecutar schema.sql: las tablas y funciones ya existen.
+SEGURIDAD.txt: permisos y alcance de las verificaciones.

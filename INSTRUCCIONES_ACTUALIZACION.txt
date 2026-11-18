@@ -1,0 +1,25 @@
+MI MUNICIPIO — PAQUETE DE ACTUALIZACIÓN 31/10/2026
+
+CONTENIDO
+- index.html: aplicación original con ajustes de navegación, mapa y permisos visibles.
+- icons/: iconos proporcionados por el titular.
+- manifest.webmanifest, sw.js, _headers: instalación PWA y Netlify.
+- supabase/functions/mi-municipio/index.ts: servicio Edge Function para desplegar.
+- supabase/ACTUALIZACION_PERMISOS.sql: migración incremental de permisos.
+- supabase/schema.sql y seed-reference.sql: referencias históricas. NO VOLVER A EJECUTAR.
+
+IMPORTANTE: NO BASTA CON SUBIR EL ZIP A NETLIFY PARA ACTIVAR LOS PERMISOS.
+1. Guarda una copia de seguridad de la base de datos y del sitio actual.
+2. Ejecuta supabase/ACTUALIZACION_PERMISOS.sql en SQL Editor del proyecto correcto.
+3. Despliega supabase/functions/mi-municipio/index.ts en la función mi-municipio de ese mismo proyecto.
+4. Sube a Netlify la CARPETA PRINCIPAL (index.html en la raíz), no la carpeta supabase.
+   Para GitHub, puedes guardar el paquete completo en el repositorio.
+5. Comprueba ambos roles, especialmente creación de usuarios, borrado con respaldo,
+   categorías, mapas, reportes y permisos en dos dispositivos antes de uso público.
+
+AVISOS
+- No se han ejecutado migraciones ni desplegado funciones en tu proyecto real.
+- El paquete no garantiza que todas las operaciones funcionen hasta instalar la migración
+  y desplegar la Edge Function; requiere pruebas de integración.
+- Las nuevas categorías todavía requieren ampliar la lógica del servidor.
+- No se incluyen contraseñas ni claves service_role.
